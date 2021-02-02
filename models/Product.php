@@ -4,6 +4,8 @@
 namespace app\models;
 
 
+use app\engine\Db;
+
 class Product {
 
     /**
@@ -20,5 +22,15 @@ class Product {
         private int $price
     ) {
 
+    }
+
+    public static function getOne($id) {
+        $sql = "SELECT * FROM `products` WHERE `id` = {$id}";
+        Db::queryOne($sql, [":id" => $id]);
+    }
+
+    public static function getAll() {
+        $sql = "SELECT * FROM `products`";
+        Db::queryAll($sql);
     }
 }
