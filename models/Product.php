@@ -4,9 +4,7 @@
 namespace app\models;
 
 
-use app\engine\Db;
-
-class Product {
+class Product extends Model {
 
     /**
      * Product constructor.
@@ -21,16 +19,10 @@ class Product {
         private string $description,
         private int $price
     ) {
-
+        parent::__construct();
     }
 
-    public static function getOne($id) {
-        $sql = "SELECT * FROM `products` WHERE `id` = {$id}";
-        Db::queryOne($sql, [":id" => $id]);
-    }
-
-    public static function getAll() {
-        $sql = "SELECT * FROM `products`";
-        Db::queryAll($sql);
+    static function getTableName(): string {
+        return 'products';
     }
 }
