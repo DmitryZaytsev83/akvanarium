@@ -1,11 +1,6 @@
 <?php
 
-function dump($obj) {
-    echo "<pre>";
-    var_dump($obj);
-    echo "</pre>";
-}
-
+require_once "../config/config.php";
 require_once "../engine/Autoloader.php";
 
 use app\engine\Autoloader;
