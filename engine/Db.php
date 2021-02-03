@@ -14,13 +14,13 @@ class Db {
         return static::$instance;
     }
 
-    public static function queryOne($sql, $params = []): bool {
+    public static function queryOne($sql, $params = []): object {
         dump($sql);
-        return true;
+        return static::getInstance();
     }
 
-    public static function queryAll($sql, $params = []): bool {
+    public static function queryAll($sql, $params = []): array {
         dump($sql);
-        return true;
+        return [];
     }
 }
