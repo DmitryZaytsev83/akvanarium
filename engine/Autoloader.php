@@ -6,13 +6,8 @@ namespace app\engine;
 
 class Autoloader {
     public function loadClass(string $classname): void {
-        $root = $_SERVER['DOCUMENT_ROOT'];
-        $filepath = str_replace(
-            ['app', '\\'],
-            [DIRECTORY_SEPARATOR . '..', DIRECTORY_SEPARATOR],
-            $classname
-        );
-        $filepath = $root . $filepath . ".php";
+        $filepath = str_replace(['app', '\\'], [DS . '..', DS], $classname);
+        $filepath = ROOT . $filepath . EXTENSION;
         if (file_exists($filepath)) include $filepath;
     }
 }
