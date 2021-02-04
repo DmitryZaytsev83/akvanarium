@@ -21,7 +21,7 @@ abstract class Model implements IModel {
 
     public static function getOne(int $id): array {
         $tableName = static::getTableName();
-        $sql = "SELECT * FROM `{$tableName}` WHERE `id` = {$id}";
+        $sql = "SELECT * FROM `{$tableName}` WHERE `id` = :id";
         return static::$db->queryOne($sql, [":id" => $id]);
     }
 
