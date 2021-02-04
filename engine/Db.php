@@ -4,21 +4,16 @@
 namespace app\engine;
 
 
+use app\traits\TSingleton;
 use JetBrains\PhpStorm\Pure;
 use PDO;
 use PDOStatement;
 
 class Db {
-    private static ?Db $instance = null;
+    use TSingleton;
+
     private array $config = DB_CONFIG;
     private ?PDO $connection = null;
-
-    public static function getInstance(): Db {
-        if (is_null(static::$instance)) {
-            static::$instance = new Db();
-        }
-        return static::$instance;
-    }
 
     private function getConnection(): PDO {
         if (is_null($this->connection)) {

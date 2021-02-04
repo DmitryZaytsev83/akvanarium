@@ -10,7 +10,6 @@ use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 dump("hello");
-$db = new Db();
 $product = new Product(1, "Product", "description 1", 50);
 dump(Product::getAll());
 dump(Product::getOne(2));
