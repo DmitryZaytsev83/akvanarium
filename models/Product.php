@@ -14,12 +14,11 @@ class Product extends Model {
      * @param int $price
      */
     public function __construct(
-        private int $id,
-        private string $title,
-        private string $description,
-        private int $price
+        protected ?int $id,
+        protected string $title,
+        protected string $description,
+        protected int $price
     ) {
-        parent::__construct();
     }
 
     static function getTableName(): string {

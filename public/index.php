@@ -10,7 +10,8 @@ use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 dump("hello");
-$product = new Product(1, "Product", "description 1", 50);
-dump(Product::getAll());
-dump(Product::getOne(2));
+$product = new Product(null, "Puntigrus", "tetrazona", 100);
+//dump(Product::getAll());
+//dump(Product::getOne(2));
 dump($product);
+//$product->insert();
