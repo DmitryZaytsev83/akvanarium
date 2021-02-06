@@ -5,9 +5,14 @@ require_once "../config/dbconfig.php";
 require_once "../engine/Autoloader.php";
 
 use app\engine\Autoloader;
+use app\models\Model;
 use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
+/**
+ * @var Model $product
+ */
 $product = Product::getOne(1);
-$product->update();
+dump($product);
+$product->save();

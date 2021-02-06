@@ -24,7 +24,7 @@ abstract class Model implements IModel {
         return static::getDb()->queryAll($sql);
     }
 
-    #[NoReturn] public function insert(): void {
+    #[NoReturn] private function insert(): void {
         $tableName = static::getTableName();
         $columns = [];
         $values = [];
@@ -41,7 +41,7 @@ abstract class Model implements IModel {
         $this->id = static::getDb()->getLastInsertId();
     }
 
-    #[NoReturn] public function update(): void {
+    #[NoReturn] private function update(): void {
         $tableName = static::getTableName();
         $values = [];
         foreach ($this as $key => $value) {
@@ -57,6 +57,14 @@ abstract class Model implements IModel {
         $tableName = static::getTableName();
         $sql = "DELETE FROM `{$tableName}` WHERE `id` = :id";
         static::getDb()->execute($sql, [':id' => $this->id]);
+    }
+
+    #[NoReturn] public function save(): void {
+        if (is_null($this->id)) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
     }
 
     public static function getDb(): object {
