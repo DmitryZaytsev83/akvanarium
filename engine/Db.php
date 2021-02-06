@@ -63,4 +63,8 @@ class Db {
     public function queryAll(string $sql, array $params = []): array {
         return $this->query($sql, $params)->fetchAll();
     }
+
+    public function getLastInsertId() {
+        return $this->connection->lastInsertId();
+    }
 }

@@ -38,6 +38,7 @@ abstract class Model implements IModel {
         $values = implode(", ", $values);
         $sql = "INSERT INTO `{$tableName}` ({$columns}) VALUES ({$values})";
         static::getDb()->execute($sql);
+        $this->id = static::getDb()->getLastInsertId();
     }
 
     public function delete(): void {
