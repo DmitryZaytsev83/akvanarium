@@ -29,7 +29,7 @@ abstract class Model implements IModel {
         $columns = [];
         $values = [];
         foreach ($this as $key => $value) {
-            if ($key != 'id') {
+            if ($key !== 'id') {
                 array_push($columns, "`" . $key . "`");
                 array_push($values, "'" . $value . "'");
             }
@@ -41,14 +41,25 @@ abstract class Model implements IModel {
         $this->id = static::getDb()->getLastInsertId();
     }
 
-    public function delete(): void {
+    #[NoReturn] public function update(): void {
         $tableName = static::getTableName();
-        $sql = "DELETE FROM `{$tableName}` WHERE `id` = :id";
-        dump($sql);
+        $values = [];
+        foreach ($this as $key => $value) {
+            if ($key !== 'id')
+                array_push($values, "`$key` = '$value'");
+        }
+        $values = implode(", ", $values);
+        $sql = "UPDATE `{$tableName}` SET {$values} WHERE `id` = :id";
         static::getDb()->execute($sql, [':id' => $this->id]);
     }
 
-    public static function getDb(): Db {
+    #[NoReturn] public function delete(): void {
+        $tableName = static::getTableName();
+        $sql = "DELETE FROM `{$tableName}` WHERE `id` = :id";
+        static::getDb()->execute($sql, [':id' => $this->id]);
+    }
+
+    public static function getDb(): object {
         return Db::getInstance();
     }
 }
