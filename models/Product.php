@@ -4,7 +4,7 @@
 namespace app\models;
 
 
-class Product extends Model {
+class Product extends Record {
 
     /**
      * Product constructor.

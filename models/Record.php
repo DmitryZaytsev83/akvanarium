@@ -5,10 +5,10 @@ namespace app\models;
 
 
 use app\engine\Db;
-use app\interfaces\IModel;
+use app\interfaces\IRecord;
 use JetBrains\PhpStorm\NoReturn;
 
-abstract class Model implements IModel {
+abstract class Record implements IRecord {
 
     abstract static function getTableName(): string;
 

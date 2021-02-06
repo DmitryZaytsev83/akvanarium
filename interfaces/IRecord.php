@@ -4,7 +4,7 @@
 namespace app\interfaces;
 
 
-interface IModel {
+interface IRecord {
     static function getOne(int $id): object;
 
     static function getAll(): array;
