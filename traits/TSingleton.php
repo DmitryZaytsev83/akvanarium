@@ -5,7 +5,7 @@ namespace app\traits;
 
 
 trait TSingleton {
-    private static $instance = null;
+    private static ?object $instance = null;
 
     private function __construct() {
     }
@@ -16,7 +16,7 @@ trait TSingleton {
     public function __wakeup() {
     }
 
-    public static function getInstance(): static {
+    public static function getInstance(): object {
         if (is_null(static::$instance)) {
             static::$instance = new static();
         }

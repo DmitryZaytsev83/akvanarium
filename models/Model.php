@@ -12,10 +12,10 @@ abstract class Model implements IModel {
 
     abstract static function getTableName(): string;
 
-    public static function getOne(int $id): array {
+    public static function getOne(int $id): object {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM `{$tableName}` WHERE `id` = :id";
-        return static::getDb()->queryOne($sql, [":id" => $id]);
+        return static::getDb()->queryOne($sql, [":id" => $id], static::class);
     }
 
     public static function getAll(): array {
