@@ -9,9 +9,8 @@ use app\engine\Db;
 use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
-dump("hello");
-$product = new Product(null, "Puntigrus", "tetrazona", 100);
-//dump(Product::getAll());
-//dump(Product::getOne(2));
-dump($product);
+
+//$product1 = Product::getOne(2);
+//dump($product1);
+//$product = new Product(null, "fish", "simple fish", 10);
 //$product->insert();

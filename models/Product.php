@@ -8,16 +8,16 @@ class Product extends Model {
 
     /**
      * Product constructor.
-     * @param int $id
-     * @param string $title
-     * @param string $description
-     * @param int $price
+     * @param ?int $id
+     * @param ?string $title
+     * @param ?string $description
+     * @param ?int $price
      */
     public function __construct(
-        protected ?int $id,
-        protected string $title,
-        protected string $description,
-        protected int $price
+        protected ?int $id = null,
+        protected ?string $title = null,
+        protected ?string $description = null,
+        protected ?int $price = null
     ) {
     }
 
