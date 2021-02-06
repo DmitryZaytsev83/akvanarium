@@ -10,7 +10,9 @@ use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
-//$product1 = Product::getOne(2);
+$product1 = Product::getOne(5);
+dump($product1);
+//$product1->delete();
 //dump($product1);
 //$product = new Product(null, "fish", "simple fish", 10);
 //$product->insert();
