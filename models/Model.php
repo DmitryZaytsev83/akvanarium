@@ -40,6 +40,12 @@ abstract class Model implements IModel {
         static::getDb()->execute($sql);
     }
 
+    public function delete(): void {
+        $tableName = static::getTableName();
+        $sql = "DELETE FROM `{$tableName}` WHERE `id` = [:id]";
+        static::getDb()->execute($sql, [':id' => $this->id]);
+    }
+
     public static function getDb(): Db {
         return Db::getInstance();
     }
