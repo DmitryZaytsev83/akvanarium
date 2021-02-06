@@ -5,14 +5,22 @@ require_once "../config/dbconfig.php";
 require_once "../engine/Autoloader.php";
 
 use app\engine\Autoloader;
-use app\models\Record;
-use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
-/**
- * @var Record $product
- */
-$product = Product::getOne(1);
-dump($product);
-$product->save();
+$controllerName = $_SERVER['REQUEST_URI'];
+$uri = explode("/", $controllerName);
+$uri = array_filter($uri);
+if (count($uri) < 1) {
+    $controllerClass = "app\\controllers\\ProductController";
+} else
+    $controllerClass = "app\\controllers\\" . ucfirst($uri[1]) . "Controller";
+if (count($uri) < 2) {
+    $actionName = "";
+} else {
+    $actionName = $uri[2];
+}
+if (class_exists($controllerClass)) {
+    $controller = new $controllerClass();
+    $controller->runAction($actionName);
+}
