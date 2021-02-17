@@ -4,28 +4,19 @@
 namespace app\controllers;
 
 
-class ProductController {
+use app\models\Product;
 
-    private string $action;
-    private string $defaultAction = 'index';
+class ProductController extends Controller {
 
-
-    public function runAction($action = null): void {
-        $this->action = $action ?: $this->defaultAction;
-        $method = 'action' . ucfirst($this->action);
-        if (method_exists($this, $method)) {
-            $this->$method();
-        } else {
-            $this->actionIndex();
-        }
+    protected function actionCatalog() {
+        $catalog = Product::getAll();
+        echo $this->render("catalog", ['catalog'=>$catalog]);
     }
 
-    private function actionCatalog() {
-        echo "catalog";
-    }
-
-    private function actionCard() {
-        echo "card";
+    protected function actionCard() {
+        $id = 1;
+        $product = Product::getOne($id);
+        echo $this->renderTemplate("card", ['product' => $product]);
     }
 
     public function actionIndex() {
