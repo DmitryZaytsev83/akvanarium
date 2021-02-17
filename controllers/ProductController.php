@@ -10,7 +10,13 @@ class ProductController extends Controller {
 
     protected function actionCatalog() {
         $catalog = Product::getAll();
-        echo $this->render("catalog", ['catalog'=>$catalog]);
+        echo $this->render("catalog", ['catalog' => $catalog]);
+    }
+
+    protected function actionApicatalog() {
+        $catalog = Product::getAll();
+        header('Content-Type: application/json');
+        echo json_encode(['goods' => $catalog], JSON_NUMERIC_CHECK);
     }
 
     protected function actionCard() {
