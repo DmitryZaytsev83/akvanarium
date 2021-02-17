@@ -1,0 +1,31 @@
+<?php
+
+
+namespace app\controllers;
+
+
+use app\models\Product;
+
+class ProductController extends Controller {
+
+    protected function actionCatalog() {
+        $catalog = Product::getAll();
+        echo $this->render("catalog", ['catalog' => $catalog]);
+    }
+
+    protected function actionApicatalog() {
+        $catalog = Product::getAll();
+        header('Content-Type: application/json');
+        echo json_encode(['goods' => $catalog], JSON_NUMERIC_CHECK);
+    }
+
+    protected function actionCard() {
+        $id = 1;
+        $product = Product::getOne($id);
+        echo $this->renderTemplate("card", ['product' => $product]);
+    }
+
+    public function actionIndex() {
+        $this->actionCatalog();
+    }
+}
