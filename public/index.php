@@ -5,6 +5,7 @@ require_once "../config/dbconfig.php";
 require_once "../engine/Autoloader.php";
 
 use app\engine\Autoloader;
+use app\engine\Render;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
@@ -21,6 +22,6 @@ if (count($uri) < 2) {
     $actionName = $uri[2];
 }
 if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
+    $controller = new $controllerClass(new Render());
     $controller->runAction($actionName);
 }
