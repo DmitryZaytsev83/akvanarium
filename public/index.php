@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once "../config/config.php";
 require_once "../config/dbconfig.php";
 require_once "../engine/Autoloader.php";
