@@ -6,22 +6,14 @@ require_once "../engine/Autoloader.php";
 
 use app\engine\Autoloader;
 use app\engine\Render;
+use app\engine\Request;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
-$controllerName = $_SERVER['REQUEST_URI'];
-$uri = explode("/", $controllerName);
-$uri = array_filter($uri);
-if (count($uri) < 1) {
-    $controllerClass = "app\\controllers\\ProductController";
-} else
-    $controllerClass = "app\\controllers\\" . ucfirst($uri[1]) . "Controller";
-if (count($uri) < 2) {
-    $actionName = "";
-} else {
-    $actionName = $uri[2];
-}
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass(new Render());
-    $controller->runAction($actionName);
+$request = new Request();
+//die();
+
+if (class_exists($request->getControllerClass())) {
+    $controller = new ($request->getControllerClass())(new Render());
+    $controller->runAction($request->getActionName());
 }
