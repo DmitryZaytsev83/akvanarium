@@ -4,16 +4,16 @@
 namespace app\controllers;
 
 
-use app\engine\Render;
 use app\interfaces\IRenderer;
+use app\models\Basket;
 use JetBrains\PhpStorm\Pure;
 
-class Controller implements IRenderer {
+abstract class Controller {
     protected string $action;
     protected string $defaultAction = 'index';
     protected string $layout = 'main';
     protected bool $useLayout = true;
-    protected Render $renderer;
+    protected IRenderer $renderer;
 
     /**
      * Controller constructor.
@@ -22,7 +22,6 @@ class Controller implements IRenderer {
     #[Pure] public function __construct(IRenderer $renderer) {
         $this->renderer = $renderer;
     }
-
 
     public function runAction($action = null): void {
         $this->action = $action ?: $this->defaultAction;
@@ -33,13 +32,13 @@ class Controller implements IRenderer {
 
     public function render(string $template, array $params = []): string|false {
         if ($this->useLayout)
-            return $this->renderTemplate("layouts/{$this->layout}",
-                ['content' => $this->renderTemplate($template, $params)]);
+            return $this->renderer->renderTemplate("layouts/{$this->layout}",
+                ['content' => $this->renderer->renderTemplate($template,
+                    $params),
+                    'count' => (Basket::getCountWhere('session_id', session_id()))]);
         else
-            return $this->renderTemplate($template, $params);
+            return $this->renderer->renderTemplate($template, $params);
     }
 
-    public function renderTemplate(string $template, array $params): string {
-        return $this->renderer->renderTemplate($template, $params);
-    }
+    abstract function actionIndex();
 }

@@ -49,15 +49,15 @@ class Db {
         return true;
     }
 
-    private function queryObject(string $sql, array $params, string $className) {
+    public function queryObject(string $sql, array $params, string $className) {
         $pdoStatement = $this->query($sql, $params);
         $pdoStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);
         return $pdoStatement->fetch();
     }
 
-    public function queryOne(string $sql, array $params, $className):
-    object {
-        return $this->queryObject($sql, $params, $className);
+    public function queryOne(string $sql, array $params):
+    array {
+        return $this->queryAll($sql, $params)[0];
     }
 
     public function queryAll(string $sql, array $params = []): array {
