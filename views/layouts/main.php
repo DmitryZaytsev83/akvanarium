@@ -1,6 +1,7 @@
 <?php
 /**
  * @var string $content
+ * @var int $count
  */
 ?>
 <!doctype html>
@@ -14,6 +15,28 @@
     <title>Akvanarium</title>
 </head>
 <body>
-<?= $content; ?>
+<div class="app">
+    <div class="wrapper">
+        <header class="header">
+            <div class="logo">LOGO</div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a class="nav-link"
+                                            href="/">Main</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="/product/catalog">Catalog</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/basket">Basket</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="basket">Basket: <?= $count; ?></div>
+        </header>
+        <main>
+            <?= $content; ?>
+        </main>
+    </div>
+    <footer class="footer">I'm footer</footer>
+</div>
 </body>
 </html>

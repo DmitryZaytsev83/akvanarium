@@ -5,6 +5,7 @@ namespace app\controllers;
 
 
 use app\interfaces\IRenderer;
+use app\models\Basket;
 use JetBrains\PhpStorm\Pure;
 
 abstract class Controller {
@@ -32,7 +33,9 @@ abstract class Controller {
     public function render(string $template, array $params = []): string|false {
         if ($this->useLayout)
             return $this->renderer->renderTemplate("layouts/{$this->layout}",
-                ['content' => $this->renderer->renderTemplate($template, $params)]);
+                ['content' => $this->renderer->renderTemplate($template,
+                    $params),
+                    'count' => (Basket::getCountWhere('session_id', session_id()))]);
         else
             return $this->renderer->renderTemplate($template, $params);
     }

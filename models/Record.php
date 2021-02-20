@@ -15,13 +15,21 @@ abstract class Record implements IRecord {
     public static function getOne(int $id): object {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM `{$tableName}` WHERE `id` = :id";
-        return static::getDb()->queryOne($sql, [":id" => $id], static::class);
+        return static::getDb()->queryObject($sql, [":id" => $id],
+            static::class);
     }
 
     public static function getAll(): array {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM `{$tableName}`";
         return static::getDb()->queryAll($sql);
+    }
+
+    public static function getCountWhere(string $field, string $value): int {
+        $tableName = static::getTableName();
+        $sql = "SELECT count(*) as count FROM `{$tableName}` WHERE `{$field}` = :$field";
+        return (int)static::getDb()->queryOne($sql, [":$field" => $value])
+        ['count'];
     }
 
     #[NoReturn] private function insert(): void {

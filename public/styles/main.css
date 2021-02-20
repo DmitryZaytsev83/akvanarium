@@ -1,9 +1,76 @@
+:root {
+    --text-color: #222222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--text-color);
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.wrapper {
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: gainsboro;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+}
+
+.nav-item {
+    margin: 0 1rem;
+}
+
 .cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
 }
+
 .card {
     border: 1px solid dimgray;
     padding: 1rem;
+}
+
+.footer {
+    padding: 1rem;
+    background-color: gainsboro;
+}
+
+.btn-buy {
+    padding: 1rem 2rem;
+}
+
+h2 {
+    margin: 1rem 0;
+}
+
+main {
+    padding: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--text-color);
+
 }
